@@ -48,7 +48,7 @@ html = html
   .replace(/\sdata-nimg="[^"]*"/g, "")
   .replace(/href="\/#/g, 'href="#')
   .replace(/href="\/work\/[^"]+"/g, 'href="#work"')
-  .replace('href="/resume-placeholder.txt"', `href="data:text/plain;charset=utf-8,${resume}"`)
+  .replaceAll('href="/resume-placeholder.txt"', `href="data:text/plain;charset=utf-8,${resume}"`)
   .replace(/<link rel="icon" href="[^"]*"\/>/, `<link rel="icon" href="${favicon}"/>`)
   .replace("</head>", `<style>\n${css}\n:root{--font-montserrat:Montserrat,sans-serif}\n[data-standalone-reveal]{opacity:0;transform:translateY(24px);transition:opacity 550ms var(--ease-editorial),transform 550ms var(--ease-editorial)}\n[data-standalone-reveal].is-visible{opacity:1;transform:none}\n</style></head>`)
   .replace("</body>", `<script>

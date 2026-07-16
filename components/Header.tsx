@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { ExternalLinkIcon } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { navigation } from "@/data/site";
 
@@ -73,7 +74,7 @@ export function Header() {
   return (
     <><header className={`site-header ${scrolled ? "is-scrolled" : ""}`}>
       <Link className="wordmark" href="/#home" aria-label="Hui-Shan Chen, home">
-        Hui-Shan Chen
+        HSC.
       </Link>
 
       <nav className="primary-navigation" aria-label="Primary navigation">
@@ -98,13 +99,14 @@ export function Header() {
       </nav>
 
       <Link
-        className="header-linkedin"
-        href="https://www.linkedin.com/in/yourprofile"
+        className="header-resume"
+        href="/resume-placeholder.txt"
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Hui-Shan Chen on LinkedIn, opens in a new tab"
+        aria-label="Open Hui-Shan Chen's resume in a new tab"
       >
-        LinkedIn ↗
+        <span>Resume</span>
+        <ExternalLinkIcon aria-hidden="true" />
       </Link>
 
       <button
