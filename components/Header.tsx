@@ -132,18 +132,23 @@ export function Header() {
         <nav aria-label="Mobile navigation">
           {navigation.map((item, index) => {
             const id = item.href.split("#")[1];
+            const isResume = item.external;
             return (
               <Link
                 key={item.label}
-                href={item.href}
+                href={isResume ? "/resume-placeholder.txt" : item.href}
                 tabIndex={menuOpen ? 0 : -1}
                 className={id && activeSection === id ? "is-active" : ""}
                 onClick={() => setMenuOpen(false)}
-                target={item.external ? "_blank" : undefined}
-                rel={item.external ? "noopener noreferrer" : undefined}
+                target={isResume ? "_blank" : undefined}
+                rel={isResume ? "noopener noreferrer" : undefined}
+                aria-label={isResume ? "Open Hui-Shan Chen's resume in a new tab" : undefined}
               >
                 <span className="mobile-menu-index">0{index + 1}</span>
-                <span>{item.label}</span>
+                <span className="mobile-menu-label">
+                  {isResume ? "Resume" : item.label}
+                  {isResume ? <ExternalLinkIcon aria-hidden="true" /> : null}
+                </span>
               </Link>
             );
           })}
