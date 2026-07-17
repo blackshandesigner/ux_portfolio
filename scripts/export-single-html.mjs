@@ -6,6 +6,7 @@ const sourceUrl = process.env.PORTFOLIO_URL ?? "http://localhost:3000";
 
 const mimeFor = (file) => {
   if (file.endsWith(".webp")) return "image/webp";
+  if (file.endsWith(".jpg") || file.endsWith(".jpeg")) return "image/jpeg";
   if (file.endsWith(".svg")) return "image/svg+xml";
   if (file.endsWith(".woff2")) return "font/woff2";
   return "application/octet-stream";

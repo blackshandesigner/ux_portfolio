@@ -96,6 +96,9 @@ section { scroll-margin-top: 86px; }
 
 /* Hero */
 .hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   width: 100%;
   min-height: calc(100svh - var(--header-height));
   display: flex;
