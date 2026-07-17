@@ -12,11 +12,11 @@ const montserrat = Montserrat({
 export const metadata: Metadata = {
   metadataBase: new URL("https://huishanchen.design"),
   title: { default: "Hui-Shan Chen — Product Designer & UX Researcher", template: "%s — Hui-Shan Chen" },
-  description: "UX Researcher and Product Designer creating accessible, data-informed digital experiences across mobile and web products.",
+  description: "Product Designer turning research, data, and complex workflows into accessible B2B SaaS and AI experiences.",
   keywords: ["Product Designer", "UX Researcher", "Taipei", "Portfolio", "UX Design"],
   openGraph: {
     title: "Hui-Shan Chen — Product Designer & UX Researcher",
-    description: "Research-led digital product design for mobile and web.",
+    description: "Research-led product design for accessible B2B SaaS and AI experiences.",
     type: "website",
     images: [{ url: "/projects/contact-sheet.png", width: 1983, height: 793, alt: "A selection of five original product interface concepts" }],
   },

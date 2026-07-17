@@ -14,13 +14,12 @@ export default function Home() {
       <main id="main-content">
         <section id="home" className="hero page-container" aria-labelledby="hero-title">
           <div className="hero-intro">
-            <p>UX Researcher and Product Designer creating accessible, data-informed digital experiences across mobile and web products.</p>
+            <p>Turn research, data, and complex workflows into accessible, user-friendly B2B SaaS and AI experiences, from early discovery through launch.</p>
           </div>
           <h1 id="hero-title" className="hero-title">
             <span className="mask"><span>Product</span></span>
             <span className="mask"><span>Designer</span></span>
-            <span className="mask"><span><em>&</em> UX</span></span>
-            <span className="mask"><span>Researcher</span></span>
+            <span className="mask hero-title-accent"><span><em>B2B SaaS & AI Experience.</em></span></span>
           </h1>
           <div className="hero-meta">
             <span>Portfolio 2026</span>
@@ -28,9 +27,9 @@ export default function Home() {
         </section>
 
         <section id="work" className="work-section page-container">
-          <Reveal><SectionHeader title="Selected Work" meta="4 cases + 1 in progress" /></Reveal>
+          <Reveal><SectionHeader title="Selected Work" /></Reveal>
           <div className="project-list">
-            {projects.map((project) => <ProjectRow project={project} key={project.slug} />)}
+            {projects.slice(0, 3).map((project) => <ProjectRow project={project} key={project.slug} />)}
           </div>
         </section>
 
