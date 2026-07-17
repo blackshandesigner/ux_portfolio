@@ -3,9 +3,8 @@ import { Footer } from "@/components/Footer";
 import { ProjectRow } from "@/components/ProjectRow";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeader } from "@/components/SectionHeader";
-import { ToolkitMarquee } from "@/components/ToolkitMarquee";
 import { projects } from "@/data/projects";
-import { capabilityGroups, experiences, methods, metrics, processSteps } from "@/data/site";
+import { experiences, methods, metrics, processSteps } from "@/data/site";
 
 export default function Home() {
   return (
@@ -27,7 +26,7 @@ export default function Home() {
         </section>
 
         <section id="work" className="work-section page-container">
-          <Reveal><SectionHeader title="Selected Work" /></Reveal>
+          <Reveal><SectionHeader title="Selected Work" compact /></Reveal>
           <div className="project-list">
             {projects.slice(0, 3).map((project) => <ProjectRow project={project} key={project.slug} />)}
           </div>
@@ -35,9 +34,9 @@ export default function Home() {
 
         <section id="about" className="about-section">
           <div className="page-container">
+            <Reveal><SectionHeader title="About" compact /></Reveal>
             <Reveal className="about-grid">
               <div>
-                <p className="eyebrow">About / 01</p>
                 <h2>Hybrid<br />Researcher<br /><em>& Designer</em></h2>
               </div>
               <div className="about-copy">
@@ -68,7 +67,7 @@ export default function Home() {
         </section>
 
         <section className="experience-section page-container" aria-label="Experience timeline">
-          <Reveal><SectionHeader title="Experience" meta="8 years · 4 roles" /></Reveal>
+          <Reveal><SectionHeader title="Experience" compact /></Reveal>
           <div className="timeline">
             {experiences.map((experience) => (
               <Reveal className="experience-row" key={`${experience.title}-${experience.start}`}>
@@ -98,11 +97,11 @@ export default function Home() {
 
         <section id="process" className="process-section">
           <div className="page-container">
-            <Reveal><SectionHeader title="How I Work" meta="6-step playbook" /></Reveal>
+            <Reveal><SectionHeader title="Process" compact /></Reveal>
             <div className="process-list">
               {processSteps.map(([number, title, description]) => (
                 <Reveal className="process-row" key={number}>
-                  <span>{number}</span><h3>{title}</h3><p>{description}</p><i aria-hidden="true">↘</i>
+                  <span>{number}</span><h3>{title}</h3><p>{description}</p>
                 </Reveal>
               ))}
             </div>
@@ -121,24 +120,10 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="toolkit-section" aria-label="Design and research toolkit">
-          <div className="page-container"><Reveal><SectionHeader title="Toolkit" meta="16 tools" /></Reveal></div>
-          <ToolkitMarquee />
-        </section>
-
-        <section className="capabilities-section page-container" aria-label="Capabilities and languages">
-          {capabilityGroups.map((group, index) => (
-            <Reveal className="capability-group" key={group.title}>
-              <p><span>0{index + 1}</span>{group.title}</p>
-              <ul>{group.items.map((item) => <li key={item}>{item}</li>)}</ul>
-            </Reveal>
-          ))}
-        </section>
-
         <section id="contact" className="contact-section">
           <div className="page-container">
             <Reveal>
-              <div className="contact-top"><p className="eyebrow">Contact / Taipei</p><span>Available for selected opportunities</span></div>
+              <SectionHeader title="Contact" compact />
               <h2 className="contact-title">Let’s<br /><em>Talk</em></h2>
               <div className="contact-bottom">
                 <p>Open to product design opportunities, research collaborations, and thoughtful conversations about digital products.</p>

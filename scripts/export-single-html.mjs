@@ -25,10 +25,14 @@ if (!cssHref) throw new Error("Could not locate the compiled portfolio styleshee
 const cssResponse = await fetch(new URL(cssHref, sourceUrl));
 let css = await cssResponse.text();
 
-const fontMatches = [...css.matchAll(/url\("\.\.\/media\/([^"\)]+)"\)/g)];
-for (const [, fontName] of fontMatches) {
+const fontNames = [...new Set([...css.matchAll(/url\(["']?\.\.\/media\/([^"'\)]+)["']?\)/g)].map((match) => match[1]))];
+for (const fontName of fontNames) {
   const fontPath = path.join(root, ".next", "static", "media", fontName);
-  css = css.replaceAll(`url("../media/${fontName}")`, `url("${await dataUri(fontPath)}")`);
+  const embeddedFont = `url("${await dataUri(fontPath)}")`;
+  css = css
+    .replaceAll(`url(../media/${fontName})`, embeddedFont)
+    .replaceAll(`url("../media/${fontName}")`, embeddedFont)
+    .replaceAll(`url('../media/${fontName}')`, embeddedFont);
 }
 
 const projectImages = {};
