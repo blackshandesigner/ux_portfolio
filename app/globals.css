@@ -72,18 +72,45 @@ section { scroll-margin-top: 86px; }
 .site-header.is-scrolled { min-height: 60px; background: rgb(255 255 255 / 97%); }
 .wordmark { position: relative; z-index: 2; font-size: 20px; font-weight: 700; letter-spacing: -0.04em; }
 .primary-navigation { position: absolute; left: 50%; transform: translateX(-50%); }
-.primary-navigation ul { display: flex; align-items: center; gap: clamp(18px, 2.35vw, 38px); margin: 0; padding: 0; list-style: none; }
-.primary-navigation a { position: relative; display: block; padding-block: 12px; font-size: 14px; font-weight: 600; line-height: 1; white-space: nowrap; transition: color 180ms ease; }
-.primary-navigation a::after { content: ""; position: absolute; right: 0; bottom: 5px; left: 0; height: 1px; background: var(--sage-hover); transform: scaleX(0); transform-origin: right; transition: transform 280ms var(--ease-editorial); }
-.primary-navigation a:hover, .primary-navigation a:focus-visible, .primary-navigation a.is-active { color: var(--sage-dark); }
-.primary-navigation a:hover::after, .primary-navigation a:focus-visible::after, .primary-navigation a.is-active::after { transform: scaleX(1); transform-origin: left; }
+.primary-navigation ul {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0;
+  padding: 4px;
+  list-style: none;
+  background: #f1f1f1;
+  border-radius: 20px;
+}
+.primary-navigation a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 32px;
+  padding: 0 16px;
+  color: #575757;
+  border-radius: 16px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  transition: color 180ms ease, background-color 180ms ease;
+}
+.primary-navigation a:hover { color: var(--text); background: #e5e5e5; }
+.primary-navigation a:focus-visible { color: var(--text); outline: 2px solid var(--sage-dark); outline-offset: 2px; }
+.primary-navigation a.is-active,
+.primary-navigation a.is-active:hover,
+.primary-navigation a.is-active:focus-visible { color: #fff; background: var(--text); }
 .header-resume { position: relative; z-index: 2; display: inline-flex; align-items: center; gap: 6px; padding-block: 12px; font-size: 14px; font-weight: 600; line-height: 1; white-space: nowrap; transition: color 180ms ease; }
 .header-resume svg { width: 15px; height: 15px; stroke-width: 1.8; transition: transform 220ms var(--ease-editorial); }
 .header-resume::after { content: ""; position: absolute; right: 0; bottom: 5px; left: 0; height: 1px; background: var(--sage-hover); transform: scaleX(0); transform-origin: right; transition: transform 280ms var(--ease-editorial); }
 .header-resume:hover, .header-resume:focus-visible { color: var(--sage-dark); }
 .header-resume:hover::after, .header-resume:focus-visible::after { transform: scaleX(1); transform-origin: left; }
 .header-resume:hover svg, .header-resume:focus-visible svg { transform: translate(2px, -2px); }
-.menu-button { display: none; position: relative; z-index: 103; min-width: 52px; min-height: 44px; padding: 0; color: var(--text); background: none; border: 0; font-size: 0.78rem; font-weight: 600; }
+.menu-button { display: none; position: relative; z-index: 103; align-items: center; justify-content: center; width: 44px; height: 44px; padding: 0; color: var(--text); background: none; border: 0; border-radius: 16px; }
+.menu-button svg { width: 24px; height: 24px; stroke-width: 1.8; }
+.menu-button:hover { background: #f1f1f1; }
+.menu-button:focus-visible { outline: 2px solid var(--sage-dark); outline-offset: 2px; }
 .mobile-menu { visibility: hidden; position: fixed; inset: 0; z-index: 99; display: flex; flex-direction: column; justify-content: center; padding: 100px 24px 32px; background: var(--sage-light); opacity: 0; pointer-events: none; transition: opacity 250ms ease, visibility 250ms; }
 .mobile-menu.is-open { visibility: visible; opacity: 1; pointer-events: auto; }
 .mobile-menu nav { display: flex; flex-direction: column; border-top: 1px solid #cbd9cf; }
@@ -332,7 +359,7 @@ section { scroll-margin-top: 86px; }
 @media (max-width: 900px) {
   :root { --header-height: 68px; }
   .primary-navigation, .header-resume { display: none; }
-  .menu-button { display: block; }
+  .menu-button { display: inline-flex; }
   .hero-title { font-size: clamp(4rem, 12vw, 7rem); line-height: 1.08; }
   .project-card-link { grid-template-columns: 56px minmax(0, 1fr); }
   .project-image-placeholder { grid-column: 2; min-height: 0; aspect-ratio: 16 / 9; }

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ExternalLinkIcon } from "lucide-react";
+import { ExternalLinkIcon, MenuIcon, XIcon } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { navigation } from "@/data/site";
 
@@ -118,7 +118,9 @@ export function Header() {
         aria-label={menuOpen ? "Close menu" : "Open menu"}
         onClick={() => setMenuOpen((open) => !open)}
       >
-        <span>{menuOpen ? "Close" : "Menu"}</span>
+        {menuOpen
+          ? <XIcon aria-hidden="true" />
+          : <MenuIcon aria-hidden="true" />}
       </button>
 
     </header>
