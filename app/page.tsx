@@ -4,7 +4,7 @@ import { ProjectRow } from "@/components/ProjectRow";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeader } from "@/components/SectionHeader";
 import { projects } from "@/data/projects";
-import { experiences, methods, metrics, processSteps } from "@/data/site";
+import { experiences, methods, processSteps } from "@/data/site";
 
 export default function Home() {
   return (
@@ -37,32 +37,23 @@ export default function Home() {
             <Reveal><SectionHeader title="About" compact /></Reveal>
             <Reveal className="about-grid">
               <div>
-                <h2>Hybrid<br />Researcher<br /><em>& Designer</em></h2>
+                <h2>Product Designer<br /><em>& System Thinker</em></h2>
               </div>
               <div className="about-copy">
-                <p className="lead">I turn complex human behavior into useful, inclusive product experiences—and help teams make clearer decisions along the way.</p>
                 <div className="about-columns">
                   <div>
-                    <p>I combine qualitative research, behavioral data, product strategy, and interaction design. That hybrid perspective helps me move between the messiness of discovery and the precision of delivery.</p>
-                    <p>I care about quiet details: language that reduces hesitation, flows that respect attention, and systems that remain coherent as products grow.</p>
+                    <p>I’m a Product Designer with experience across B2B SaaS, AI-powered products, and complex digital services. I combine user research, product strategy, interaction design, analytics, and rapid prototyping to move ideas from discovery through launch and continuous improvement.</p>
+                    <p>My work includes designing AI-driven features, accessible design systems, design tokens, and operational workflows for international users. I care about making products easier to understand, easier to maintain, and more consistent across design and engineering.</p>
                   </div>
                   <ul>
-                    <li>Mobile and responsive web products</li>
-                    <li>Fast-moving product environments</li>
-                    <li>Close product and engineering partnership</li>
-                    <li>Evidence translated into product decisions</li>
+                    <li>AI-powered B2B products</li>
+                    <li>Research-led product decisions</li>
+                    <li>Accessible design systems</li>
+                    <li>Cross-functional product delivery</li>
                   </ul>
                 </div>
               </div>
             </Reveal>
-
-            <div className="metrics-grid" aria-label="Career metrics">
-              {metrics.map((metric) => (
-                <Reveal className={`metric metric-${metric.tone}`} key={metric.label}>
-                  <strong>{metric.value}</strong><span>{metric.label}</span>
-                </Reveal>
-              ))}
-            </div>
           </div>
         </section>
 
@@ -72,25 +63,31 @@ export default function Home() {
             {experiences.map((experience) => (
               <Reveal className="experience-row" key={`${experience.title}-${experience.start}`}>
                 <div className="experience-date">
-                  <span>{experience.start}</span><span>{experience.end}</span><small>{experience.duration}</small>
+                  <span>{experience.start} - {experience.end}</span><small>{experience.duration}</small>
                 </div>
                 <div className="timeline-marker" aria-hidden="true"><span /></div>
                 <div className="experience-role"><h3>{experience.title}</h3><p>{experience.company}</p></div>
-                <div className="experience-detail"><p>{experience.description}</p><ul>{experience.achievements.map((achievement) => <li key={achievement}>{achievement}</li>)}</ul></div>
+                <div className="experience-detail">
+                  {experience.description ? <p>{experience.description}</p> : null}
+                  <ul>{experience.achievements.map((achievement) => <li key={achievement}>{achievement}</li>)}</ul>
+                </div>
               </Reveal>
             ))}
           </div>
 
-          <Reveal className="credentials-grid">
-            <div>
-              <p className="eyebrow">Education</p>
-              <div className="credential-row"><h3>Master of Human-Computer Interaction</h3><p>University of Design & Technology</p><span>2020</span></div>
-              <div className="credential-row"><h3>BA, Visual Communication</h3><p>National Arts University</p><span>2017</span></div>
-            </div>
-            <div>
-              <p className="eyebrow">Certifications</p>
-              <div className="credential-row"><h3>Inclusive Design for Digital Products</h3><p>Interaction Design Foundation</p><span>2025</span></div>
-              <div className="credential-row"><h3>Product Analytics</h3><p>Reforge</p><span>2023</span></div>
+          <Reveal className="education-section">
+            <SectionHeader title="Education" compact />
+            <div className="education-list">
+              <div className="experience-row education-row">
+                <div className="experience-date"><span>2017 - 2019</span><small>Milan, Italy</small></div>
+                <div className="timeline-marker" aria-hidden="true"><span /></div>
+                <div className="experience-role"><h3>Master in Business Design</h3><p>Domus Academy</p></div>
+              </div>
+              <div className="experience-row education-row">
+                <div className="experience-date"><span>2011 - 2015</span><small>Kaohsiung, Taiwan</small></div>
+                <div className="timeline-marker" aria-hidden="true"><span /></div>
+                <div className="experience-role"><h3>BFA in Digital Media Design</h3><p>I-Shou University</p></div>
+              </div>
             </div>
           </Reveal>
         </section>
