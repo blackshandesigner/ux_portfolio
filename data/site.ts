@@ -10,7 +10,7 @@ export const navigation: NavigationItem[] = [
   { label: "About", href: "/#about" },
   { label: "Process", href: "/#process" },
   { label: "Contact", href: "/#contact" },
-  { label: "LinkedIn ↗", href: "https://www.linkedin.com/in/yourprofile", external: true },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/hui-shan-chen-35b263117/", external: true },
 ];
 
 export const metrics = [
@@ -65,18 +65,18 @@ export const experiences = [
 ];
 
 export const processSteps = [
-  ["01", "Align", "Understand goals, user needs, metrics, risks, constraints, and assumptions."],
-  ["02", "Choose", "Select methods based on the decision, available time, risk, and complexity."],
-  ["03", "Execute", "Interview, observe, prototype, test, and analyze behavior with care."],
-  ["04", "Synthesize", "Identify patterns, tensions, unmet needs, and product opportunities."],
-  ["05", "Decide", "Translate evidence into clear priorities and accountable product choices."],
-  ["06", "Measure", "Evaluate usability, behavior, outcomes, and what the team learned."],
+  ["01", "Align", "Business goals, problem framing, analyze metrics, risks, stakeholder context."],
+  ["02", "Explore", "Research the problem through feedback, user interviews, analytics, and competitor review."],
+  ["03", "Prototype", "Rapid concept in AI tooling to visualize ideas early and align cross-functional teams."],
+  ["04", "Synthesize", "Usability testing with customers, align with engineers on technical feasibility, internal design critiques and iteration."],
+  ["05", "Refine", "Refine and analysis flow with AI tools, finalize wireframes, and build-ready requirements."],
+  ["06", "Deliver", "Final testing, bug review, launch and learning."],
 ];
 
 export const methods = {
-  Qualitative: ["In-depth interviews", "Moderated usability testing", "Diary studies", "Contextual inquiry", "Co-creation", "Card sorting"],
-  Quantitative: ["Surveys", "A/B testing", "Behavioral analysis", "Cohort analysis", "Funnel analysis"],
-  Synthesis: ["Personas", "User segments", "Jobs to Be Done", "Journey maps", "Affinity mapping", "Opportunity solution trees"],
+  Discovery: ["Stakeholder interviews", "Collect user feedback", "Google analytic review", "Define assumptions for validation"],
+  Validation: ["AI prototype", "User testing", "Analyze testing feedback and synthesize the assumption.", "Technical discovery", "Design critique"],
+  Delivery: ["Flow mapping overview", "Refine design mockups", "Bug bash"],
 };
 
 export const tools = ["Figma", "FigJam", "Dovetail", "Maze", "UserTesting", "Hotjar", "GA4", "Amplitude", "Mixpanel", "Notion", "Miro", "Airtable", "ChatGPT", "Claude", "Jira", "Webflow"];

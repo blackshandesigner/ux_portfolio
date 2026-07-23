@@ -98,17 +98,6 @@ export function Header() {
         </ul>
       </nav>
 
-      <Link
-        className="header-resume"
-        href="/resume-placeholder.txt"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Open Hui-Shan Chen's resume in a new tab"
-      >
-        <span>Resume</span>
-        <ExternalLinkIcon aria-hidden="true" />
-      </Link>
-
       <button
         ref={menuButtonRef}
         className="menu-button"
@@ -134,22 +123,22 @@ export function Header() {
         <nav aria-label="Mobile navigation">
           {navigation.map((item, index) => {
             const id = item.href.split("#")[1];
-            const isResume = item.external;
+            const isExternal = item.external;
             return (
               <Link
                 key={item.label}
-                href={isResume ? "/resume-placeholder.txt" : item.href}
+                href={item.href}
                 tabIndex={menuOpen ? 0 : -1}
                 className={id && activeSection === id ? "is-active" : ""}
                 onClick={() => setMenuOpen(false)}
-                target={isResume ? "_blank" : undefined}
-                rel={isResume ? "noopener noreferrer" : undefined}
-                aria-label={isResume ? "Open Hui-Shan Chen's resume in a new tab" : undefined}
+                target={isExternal ? "_blank" : undefined}
+                rel={isExternal ? "noopener noreferrer" : undefined}
+                aria-label={isExternal ? "Open Hui-Shan Chen's LinkedIn profile in a new tab" : undefined}
               >
                 <span className="mobile-menu-index">0{index + 1}</span>
                 <span className="mobile-menu-label">
-                  {isResume ? "Resume" : item.label}
-                  {isResume ? <ExternalLinkIcon aria-hidden="true" /> : null}
+                  {item.label}
+                  {isExternal ? <ExternalLinkIcon aria-hidden="true" /> : null}
                 </span>
               </Link>
             );

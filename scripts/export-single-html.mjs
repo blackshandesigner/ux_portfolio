@@ -24,7 +24,13 @@ let html = await response.text();
 const cssHref = html.match(/href="([^"]+\.css[^"]*)"/)?.[1];
 if (!cssHref) throw new Error("Could not locate the compiled portfolio stylesheet.");
 const cssResponse = await fetch(new URL(cssHref, sourceUrl));
+if (!cssResponse.ok) {
+  throw new Error(`Could not load the compiled portfolio stylesheet: ${cssResponse.status}`);
+}
 let css = await cssResponse.text();
+if (!css.includes(".site-header") || !css.includes(".hero")) {
+  throw new Error("The compiled portfolio stylesheet response was incomplete.");
+}
 
 const fontNames = [...new Set([...css.matchAll(/url\(["']?\.\.\/media\/([^"'\)]+)["']?\)/g)].map((match) => match[1]))];
 for (const fontName of fontNames) {

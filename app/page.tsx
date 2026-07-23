@@ -5,6 +5,7 @@ import { Reveal } from "@/components/Reveal";
 import { SectionHeader } from "@/components/SectionHeader";
 import { projects } from "@/data/projects";
 import { experiences, methods, processSteps } from "@/data/site";
+import { ExternalLink, Mail } from "lucide-react";
 
 export default function Home() {
   return (
@@ -94,26 +95,29 @@ export default function Home() {
 
         <section id="process" className="process-section">
           <div className="page-container">
-            <Reveal><SectionHeader title="Process" compact /></Reveal>
-            <div className="process-list">
+            <Reveal>
+              <SectionHeader title="How I Work" meta="AI-enhanced 6 steps playbook" compact />
+            </Reveal>
+            <div className="process-playbook">
+              <div className="process-list">
               {processSteps.map(([number, title, description]) => (
                 <Reveal className="process-row" key={number}>
-                  <span>{number}</span><h3>{title}</h3><p>{description}</p>
+                    <span>{number}</span>
+                    <h3>{title}</h3>
+                    <p>{description}</p>
                 </Reveal>
               ))}
-            </div>
-
-            <Reveal className="methods-section">
-              <div className="methods-intro"><p className="eyebrow">Research methods</p><h2>Right-sized to the decision, never the ritual.</h2></div>
+              </div>
               <div className="methods-groups">
                 {Object.entries(methods).map(([group, items]) => (
-                  <div className="method-group" key={group}>
+                  <Reveal className="method-group" key={group}>
                     <h3>{group}</h3>
                     <div>{items.map((item) => <span className="method-tag" key={item}>{item}</span>)}</div>
-                  </div>
+                  </Reveal>
                 ))}
               </div>
-            </Reveal>
+            </div>
+            <p className="process-summary">Flexible process spanning product discovery, solution validation, and delivery.</p>
           </div>
         </section>
 
@@ -121,15 +125,22 @@ export default function Home() {
           <div className="page-container">
             <Reveal>
               <SectionHeader title="Contact" compact />
-              <h2 className="contact-title">Let’s<br /><em>Talk</em></h2>
-              <div className="contact-bottom">
-                <p>Open to product design opportunities, research collaborations, and thoughtful conversations about digital products.</p>
-                <div className="contact-links">
-                  <a className="email-link" href="mailto:hello@yourportfolio.com">hello@yourportfolio.com ↗</a>
-                  <div>
-                    <a href="https://www.linkedin.com/in/yourprofile" target="_blank" rel="noopener noreferrer">LinkedIn <span>↗</span></a>
-                    <a className="resume-link" href="/resume-placeholder.txt" download>Download résumé ↓</a>
-                    <span>Taipei, Taiwan · GMT+8</span>
+              <div className="contact-layout">
+                <div className="contact-panel">
+                  <p>Open to new opportunities, collaborations, and conversations about product design, research, and AI experiences.</p>
+                  <div className="contact-links">
+                    <a href="mailto:blackshandesigner@gmail.com">
+                      <span className="contact-link-label">
+                        <Mail aria-hidden="true" />
+                        <span>blackshandesigner@gmail.com</span>
+                      </span>
+                    </a>
+                    <a href="https://www.linkedin.com/in/hui-shan-chen-35b263117/" target="_blank" rel="noopener noreferrer">
+                      <span className="contact-link-label">
+                        <ExternalLink aria-hidden="true" />
+                        <span>LinkedIn</span>
+                      </span>
+                    </a>
                   </div>
                 </div>
               </div>
