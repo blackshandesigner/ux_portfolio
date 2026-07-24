@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { ExternalLinkIcon, MenuIcon, XIcon } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type MouseEvent } from "react";
 import { navigation } from "@/data/site";
 
 const sectionIds = ["home", "work", "about", "process", "contact"];
@@ -13,26 +13,78 @@ export function Header() {
   const [activeSection, setActiveSection] = useState("home");
   const menuRef = useRef<HTMLDivElement>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const navigationTargetRef = useRef<string | null>(null);
+
+  const scrollToSection = (event: MouseEvent<HTMLAnchorElement>, id?: string) => {
+    if (!id) return;
+    const target = document.getElementById(id);
+    if (!target) return;
+    event.preventDefault();
+    navigationTargetRef.current = id;
+    setActiveSection(id);
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    target.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "start" });
+    window.history.pushState(null, "", `#${id}`);
+  };
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 24);
+
+      if (navigationTargetRef.current) {
+        setActiveSection(navigationTargetRef.current);
+        return;
+      }
+
+      const atPageBottom =
+        window.scrollY + window.innerHeight >=
+        document.documentElement.scrollHeight - 4;
+
+      if (atPageBottom) {
+        setActiveSection("contact");
+        return;
+      }
+
+      const marker = window.scrollY + Math.min(window.innerHeight * 0.32, 280);
+      let currentSection = "home";
+
+      sectionIds.forEach((id) => {
+        const section = document.getElementById(id);
+        if (section && section.offsetTop <= marker) currentSection = id;
+      });
+
+      setActiveSection(currentSection);
+    };
+
+    const resumeScrollTracking = () => {
+      navigationTargetRef.current = null;
+      onScroll();
+    };
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      const scrollKeys = [
+        "ArrowDown",
+        "ArrowUp",
+        "PageDown",
+        "PageUp",
+        "Home",
+        "End",
+        " ",
+      ];
+      if (scrollKeys.includes(event.key)) resumeScrollTracking();
+    };
+
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-
-    const observers = sectionIds.map((id) => {
-      const section = document.getElementById(id);
-      if (!section) return null;
-      const observer = new IntersectionObserver(
-        ([entry]) => entry.isIntersecting && setActiveSection(id),
-        { rootMargin: "-22% 0px -62% 0px", threshold: 0 },
-      );
-      observer.observe(section);
-      return observer;
-    });
+    window.addEventListener("wheel", resumeScrollTracking, { passive: true });
+    window.addEventListener("touchstart", resumeScrollTracking, { passive: true });
+    window.addEventListener("keydown", onKeyDown);
 
     return () => {
       window.removeEventListener("scroll", onScroll);
-      observers.forEach((observer) => observer?.disconnect());
+      window.removeEventListener("wheel", resumeScrollTracking);
+      window.removeEventListener("touchstart", resumeScrollTracking);
+      window.removeEventListener("keydown", onKeyDown);
     };
   }, []);
 
@@ -86,6 +138,7 @@ export function Header() {
                 <Link
                   href={item.href}
                   className={id && activeSection === id ? "is-active" : ""}
+                  onClick={(event) => scrollToSection(event, id)}
                   target={item.external ? "_blank" : undefined}
                   rel={item.external ? "noopener noreferrer" : undefined}
                   aria-label={item.external ? "Hui-Shan Chen on LinkedIn, opens in a new tab" : undefined}
@@ -121,7 +174,7 @@ export function Header() {
         aria-hidden={!menuOpen}
       >
         <nav aria-label="Mobile navigation">
-          {navigation.map((item, index) => {
+          {navigation.filter((item) => !item.external).map((item, index) => {
             const id = item.href.split("#")[1];
             const isExternal = item.external;
             return (
@@ -130,7 +183,10 @@ export function Header() {
                 href={item.href}
                 tabIndex={menuOpen ? 0 : -1}
                 className={id && activeSection === id ? "is-active" : ""}
-                onClick={() => setMenuOpen(false)}
+                onClick={(event) => {
+                  scrollToSection(event, id);
+                  setMenuOpen(false);
+                }}
                 target={isExternal ? "_blank" : undefined}
                 rel={isExternal ? "noopener noreferrer" : undefined}
                 aria-label={isExternal ? "Open Hui-Shan Chen's LinkedIn profile in a new tab" : undefined}
@@ -144,7 +200,6 @@ export function Header() {
             );
           })}
         </nav>
-        <p>UX Researcher & Product Designer<br />Taipei, Taiwan</p>
       </div>
     </>
   );
